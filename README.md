@@ -20,7 +20,6 @@ Welcome to the Hotel Reservation System project! This system is built using Pyth
   - [Services Management](#services-management)
   - [User Management](#user-management)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
