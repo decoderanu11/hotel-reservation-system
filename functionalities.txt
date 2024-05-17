@@ -1,0 +1,136 @@
+functionalities :
+✔️ => completed
+1. Shashank✔️**Customer Management**: Add, update, delete, and view customer details. This includes information like name, contact details, and address.
+
+2. Shyam✔️**Room Management**: Add, update, delete, and view room details. This includes information like room number, room type, and room price.
+
+3. Sourabh✔️**Booking Management**: Make a booking, update a booking, cancel a booking, and view booking details. This includes information like customer ID, room number, check-in date, and check-out date.
+
+4. Deepak✔️**Billing Management**: Generate bills for customers based on their bookings and any additional services they used.
+
+5. ✔️**Availability Check**: Check the availability of rooms for a given date range.
+
+6. Upashana✔️**Services Management**: Manage additional services like laundry, spa, gym, and restaurant, including adding, updating, deleting, and viewing service details, and managing bookings for these services.
+    Subhankar✔️ Service Booking
+
+7. Bhawna✔️**User Management**: Manage users of the system, including adding, updating, deleting, and viewing user details, and managing user roles and permissions.
+
+8. Simran ✔️ **Database
+
+9. Anurag ✔️ SetupFiles, main files, env's, modules  etc..
+
+
+
+
+basic outline of the tables and their attributes that might need for a hotel management system:
+
+1. **Customers**:
+    - CustomerID (Primary Key)
+    - FirstName
+    - LastName
+    - Email
+    - Phone
+    - Address
+
+2. **Rooms**:
+    - RoomID (Primary Key)
+    - RoomType (e.g., Single, Double, Suite)
+    - Price
+    - Status (e.g., Available, Booked)
+
+3. **Bookings**:
+    - BookingID (Primary Key)
+    - CustomerID (Foreign Key referencing Customers)
+    - RoomID (Foreign Key referencing Rooms)
+    - CheckInDate
+    - CheckOutDate
+    - NumberOfGuests
+
+4. **Bills**:
+    - BillID (Primary Key)
+    - BookingID (Foreign Key referencing Bookings)
+    - TotalAmount
+    - PaymentStatus (e.g., Paid, Unpaid)
+
+5. **Users**:
+    - UserID (Primary Key)
+    - Username
+    - Password
+    - Role (e.g., Admin, Staff)
+
+6. **Services**:
+    - ServiceID (Primary Key)
+    - ServiceName
+    - Price
+
+7. **ServiceBookings**:
+    - ServiceBookingID (Primary Key)
+    - BookingID (Foreign Key referencing Bookings)
+    - ServiceID (Foreign Key referencing Services)
+    - Quantity
+
+
+SQL queries to create the tables based on above selection:
+
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY AUTO_INCREMENT,
+    FirstName VARCHAR(100),
+    LastName VARCHAR(100),
+    Email VARCHAR(100),
+    Phone VARCHAR(15),
+    Address VARCHAR(255)
+);
+
+CREATE TABLE Rooms (
+    RoomID INT PRIMARY KEY AUTO_INCREMENT,
+    RoomType VARCHAR(50),
+    Price DECIMAL(10, 2),
+    Status VARCHAR(50)
+);
+
+CREATE TABLE Bookings (
+    BookingID INT PRIMARY KEY AUTO_INCREMENT,
+    CustomerID INT,
+    RoomID INT,
+    CheckInDate DATE,
+    CheckOutDate DATE,
+    NumberOfGuests INT,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID) ON DELETE SET NULL ON UPDATE SET NULL,
+    FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID) ON DELETE SET NULL ON UPDATE SET NULL
+);
+
+CREATE TABLE Bills (
+    BillID INT PRIMARY KEY AUTO_INCREMENT,
+    BookingID INT,
+    RoomCost DECIMAL(10, 2),
+    ServiceCost DECIMAL(10, 2),
+    TotalAmount DECIMAL(10, 2),
+    PaymentStatus VARCHAR(50),
+    FOREIGN KEY (BookingID) REFERENCES Bookings(BookingID) ON DELETE SET NULL ON UPDATE SET NULL
+);
+
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY AUTO_INCREMENT,
+    Username VARCHAR(50),
+    Password VARCHAR(50),
+    Role VARCHAR(50)
+);
+
+CREATE TABLE Services (
+    ServiceID INT PRIMARY KEY AUTO_INCREMENT,
+    ServiceName VARCHAR(100),
+    Price DECIMAL(10, 2)
+);
+
+CREATE TABLE ServiceBookings (
+    ServiceBookingID INT PRIMARY KEY AUTO_INCREMENT,
+    BookingID INT,
+    ServiceID INT,
+    Quantity INT,
+    FOREIGN KEY (BookingID) REFERENCES Bookings(BookingID) ON DELETE SET NULL ON UPDATE SET NULL,
+    FOREIGN KEY (ServiceID) REFERENCES Services(ServiceID) ON DELETE SET NULL ON UPDATE SET NULL
+);
+
+
+insert into users(Username,Password,Role) VALUES("admin","password","admin");
+
